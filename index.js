@@ -170,7 +170,7 @@ app.post('/logIn', (req, res) => {
 
 
   app.get('/GetUsernames', (req, res) => {
-    userModel.find({}, { username: 1, uniqueID: 1, _id: 0 })
+    userModel.find({}, { username: 1, uniqueID: 1,firstname: 1,lastname:1,profile: 1, _id: 0 })
       .then((docs) => {
         console.log(docs);
         return res.status(200).json({ document: docs });
