@@ -1,0 +1,10 @@
+POST http://localhost:1232/update/likes
+Content-Type: application/json
+
+{
+  "postID": "987654321",
+  "likes": {
+    "likedBy": ["varun_123#"],
+    "count": 1
+  }
+}

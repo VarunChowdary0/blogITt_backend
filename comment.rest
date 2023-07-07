@@ -1,0 +1,19 @@
+POST http://localhost:1232/update/comments
+Content-Type: application/json
+
+{
+  "postID": "987654321",
+  "comments": {
+    "count": 2,
+    "commentBLOCK": [
+      {
+        "username": "user4",
+        "comment": "Thanks for sharing."
+      },
+      {
+        "username": "user5",
+        "comment": "I enjoyed reading this."
+      }
+    ]
+  }
+}

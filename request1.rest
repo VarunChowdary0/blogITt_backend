@@ -1,0 +1,31 @@
+POST http://localhost:1232/upload-post
+Content-Type: application/json
+
+{
+  "uniqueID": "123456789",
+  "postID": "987654321",
+  "fullname": "John Doe",
+  "postImage": "example.jpg",
+  "blog": "This is a sample blog post.",
+  "likes": {
+    "likedBy": ["user1", "user2"],
+    "count": 2
+  },
+  "comments": {
+    "count": 3,
+    "commentBLOCK": [
+      {
+        "username": "user3",
+        "comment": "Great post!"
+      },
+      {
+        "username": "user4",
+        "comment": "Thanks for sharing."
+      },
+      {
+        "username": "user5",
+        "comment": "I enjoyed reading this."
+      }
+    ]
+  }
+}
