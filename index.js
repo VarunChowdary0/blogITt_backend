@@ -178,6 +178,10 @@ app.post('/logIn', (req, res) => {
       });
   });
 
+app.get('/',(req,res)=>{
+  return res.send(200).json({'status':'online'});
+})
+
 app.listen(1232,()=>{
     console.log("Server running on 1232..");
 })
