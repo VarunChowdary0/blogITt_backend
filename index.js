@@ -1,10 +1,12 @@
 const express=require('express');
 const cors = require('cors');
 const axios=require('axios');
+const helmet=require('helmet');
 const mongoose=require('mongoose');
 const userModel =require('./models/userModel.js')
 const PostModel =require('./models/postModel.js')
 const multer = require('multer');
+const mongan=require('morgan');
 const path = require('path')
 
 mongoose.connect('mongodb+srv://custom_tan:varun_123@cluster0.epypnho.mongodb.net/Blog_Site?retryWrites=true&w=majority')
@@ -19,7 +21,8 @@ const app=express();
 
 app.use('/images', express.static(path.join(__dirname, 'Images')));
 app.use('/posts', express.static(path.join(__dirname, 'PostImages')));
-
+app.use(helmet());
+app.use(mongan("common"));
 
 app.use(express.json());
 app.use(cors({
@@ -166,17 +169,17 @@ app.post('/logIn', (req, res) => {
   });
 
 
-  // app.get('/GetUsernames', (req, res) => {
-  //   userModel.find({}, { username: 1, uniqueID: 1, _id: 0 })
-  //     .then((docs) => {
-  //       console.log(docs);
-  //       return res.status(200).json({ document: docs });
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error", err);
-  //       return res.status(400).json({ error: err });
-  //     });
-  // });
+  app.get('/GetUsernames', (req, res) => {
+    userModel.find({}, { username: 1, uniqueID: 1, _id: 0 })
+      .then((docs) => {
+        console.log(docs);
+        return res.status(200).json({ document: docs });
+      })
+      .catch((err) => {
+        console.log("Error", err);
+        return res.status(400).json({ error: err });
+      });
+  });
 
 app.get('/',(req,res)=>{
   return res.status(200).json({'status':'online'});
