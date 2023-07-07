@@ -166,17 +166,17 @@ app.post('/logIn', (req, res) => {
   });
 
 
-  app.get('/GetUsernames', (req, res) => {
-    userModel.find({}, { username: 1, uniqueID: 1, _id: 0 })
-      .then((docs) => {
-        console.log(docs);
-        return res.status(200).json({ document: docs });
-      })
-      .catch((err) => {
-        console.log("Error", err);
-        return res.status(400).json({ error: err });
-      });
-  });
+  // app.get('/GetUsernames', (req, res) => {
+  //   userModel.find({}, { username: 1, uniqueID: 1, _id: 0 })
+  //     .then((docs) => {
+  //       console.log(docs);
+  //       return res.status(200).json({ document: docs });
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error", err);
+  //       return res.status(400).json({ error: err });
+  //     });
+  // });
 
 app.get('/',(req,res)=>{
   return res.status(200).json({'status':'online'});
