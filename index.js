@@ -179,7 +179,7 @@ app.post('/logIn', (req, res) => {
   });
 
 app.get('/',(req,res)=>{
-  return res.send(200).json({'status':'online'});
+  return res.status(200).json({'status':'online'});
 })
 
 app.listen(1232,()=>{
