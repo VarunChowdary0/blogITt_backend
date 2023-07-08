@@ -24,6 +24,10 @@ const PostSchema = new mongoose.Schema({
             },
             blog:{
                 type : String,
+            },
+            private_Post:{
+                type : Boolean ,
+                default : false
             }
             ,
             likes:{

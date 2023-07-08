@@ -60,7 +60,11 @@ const userSchema = new mongoose.Schema(
         Posts:{
             type :Array,
             default : [],
-    
+
+        },
+        private:{
+            type : Boolean,
+            default : false
         }
 
     }
