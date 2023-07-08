@@ -56,6 +56,11 @@ const userSchema = new mongoose.Schema(
         BlogPoints : {
             type : Number,
             default : 0
+        },
+        Posts:{
+            type :Array,
+            default : [],
+    
         }
 
     }
