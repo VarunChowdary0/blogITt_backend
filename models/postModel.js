@@ -1,33 +1,35 @@
 const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
-            uniqueID :{
+            uniqueID_p :{
                 type : String,
-                required : true,
-                unique : true 
+                required : true
             },
             postID:{
                 type : String,
-                required : true,
-                unique : true
+                unique: true,
+                required : true
             },
             fullname:{
                 type :String,
                 min : 5,
                 max : 15,
                 required: true,
-                unique : true
             },
             postImage:{
                 type : String,
-                unique : true
+                default : ''
             },
             blog:{
                 type : String,
+                required : true
             },
             private_Post:{
                 type : Boolean ,
                 default : false
+            },
+            location : {
+                type : String
             }
             ,
             likes:{

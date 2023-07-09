@@ -20,7 +20,7 @@ mongoose.connect('mongodb+srv://custom_tan:varun_123@cluster0.epypnho.mongodb.ne
 const app=express();
 
 app.use('/images', express.static(path.join(__dirname, 'Images')));
-app.use('/posts', express.static(path.join(__dirname, 'PostImages')));
+app.use('/posts', express.static('PostImages'));
 app.use(helmet());
 app.use(mongan("common"));
 
@@ -52,24 +52,41 @@ const postStorage = multer.diskStorage({
 const SavePostImg = multer({ storage : postStorage});
 //---------------------------------------------------------
 
-app.post('/upload-post/image',SavePostImg.single('image'),(req,res)=>{
-  return res.status(201).json({'message':'Post image saved'});
+// app.post('/upload-post/image',SavePostImg.single('image'),(req,res)=>{
+//   console.log("Post image");
+//   return res.status(201).json({'message':'Post image saved'});
   
-})
+// })
 
 
-app.post('/upload-post',(req,res)=>{
-  const post_info=req.body;
+app.post('/upload-post', (req, res) => {
+  const post_info = req.body;
+  console.log(post_info);
+
   PostModel.create(post_info)
-    .then((newPost)=>{
-      console.log(newPost);
-      return res.status(201).json(newPost);
+    .then((newPost) => {
+      console.log("saved post :", newPost['postID'])
+      return res.status(200).json(newPost);
     })
-    .catch((err)=>{
-      console.log("Error Posting: ",err);
-      return res.status(401).json({'message':'Unable to POST'});
-    })
+    .catch((err) => {
+      console.log("Error Posting:", err);
+      return res.status(401).json({ 'message': 'Unable to POST' });
+    });
 });
+
+
+app.post('/GetUserPosts',(req,res)=>{
+    const uniqueID_p = req.body;
+    PostModel.find(uniqueID_p)
+     .then((data)=>{
+      console.log(data);
+      return res.status(200).json(data);
+     })
+     .catch((err)=>{
+      console.log("Error: ",err);
+      return res.status(400).json({"message":err});
+     })
+})
 
 app.post('/update/likes', (req, res) => {
   const response = req.body;
@@ -146,7 +163,7 @@ app.post('/newUser',(req,res)=>{
 })
 
 
-app.post('/newUser/AddProfile', upload.single('image'), (req, res) => {
+app.post('/User/Image', upload.single('image'), (req, res) => {
     return res.status(201).json({'message' : 'profileSaved'});
 });
 

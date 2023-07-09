@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema(
         },
         following : {
             type : Array,
-            default: []
+            default: [' ']
         },
         BlogPoints : {
             type : Number,
@@ -59,14 +59,14 @@ const userSchema = new mongoose.Schema(
         },
         Posts:{
             type :Array,
-            default : [],
+            default : [' '],
 
         },
         private:{
             type : Boolean,
             default : false
         }
-
+        
     }
     ,
     {
@@ -75,7 +75,8 @@ const userSchema = new mongoose.Schema(
 );
 
 
-const userModel = new mongoose.model('user_info',userSchema);
+ const userModel = new mongoose.model('user_info',userSchema);
+//const userModel = new mongoose.model('user_info_1',userSchema);
 
 
 module.exports=userModel;
