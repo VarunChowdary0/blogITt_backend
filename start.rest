@@ -1,1 +1,1 @@
-GET  http://localhost:1232/
+GET  http://localhost:1232/AllUserData

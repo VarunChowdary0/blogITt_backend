@@ -16,6 +16,10 @@ const PostSchema = new mongoose.Schema({
                 max : 15,
                 required: true,
             },
+            profile_p:{
+                type :String,
+                required : true
+            },
             postImage:{
                 type : String,
                 default : ''
