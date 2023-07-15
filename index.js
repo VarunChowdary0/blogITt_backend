@@ -58,6 +58,69 @@ const SavePostImg = multer({ storage : postStorage});
   
 // })
 
+app.post('/edit/userInfo/location',(req,res)=>{
+  const info=req.body;
+  const uniqueID=info['uniqueID'];
+  const location = info['location'];
+  userModel.findOneAndUpdate({uniqueID : uniqueID},
+                { location : location },
+                {new : true})
+                .then((resp)=>{
+                  console.log(resp)
+                  return res.status(200).json({'message':'location changed','data':resp})
+                })
+                .catch((err)=>{
+                  return res.status(500).json({'message':'some thing went wrong'})
+                })
+})
+
+app.post('/edit/userInfo/Bio',(req,res)=>{
+  const info=req.body;
+  const uniqueID=info['uniqueID'];
+  const Bio = info['Bio'];
+  userModel.findOneAndUpdate({uniqueID : uniqueID},
+                { Bio : Bio },
+                {new : true})
+                .then((resp)=>{
+                  //console.log(resp)
+                  return res.status(200).json({'message':'Bio changed','data':resp})
+                })
+                .catch((err)=>{
+                  return res.status(500).json({'message':'some thing went wrong'})
+                })
+})
+
+
+app.post('/edit/userInfo/password',(req,res)=>{
+   const info = req.body;
+   const uniqueID=info['uniqueID'];
+   const old_pw = info['pswd_old'];
+   const new_pw = info['pswd_new'];
+   userModel.find({uniqueID : uniqueID , password : old_pw})
+      .then((foundCreds) => {
+        if (foundCreds.length === 0) {
+          return res.status(404).json("Invalid credentials");
+        } 
+        else {
+            userModel.findOneAndUpdate(
+              { uniqueID: uniqueID, password: old_pw },
+              { password: new_pw },
+              { new: true })
+                .then((resp) => {
+                  return res.status(200).json({ message: 'Password updated successfully','data':resp });
+                  })
+                .catch((err) => {
+                  console.log("Error updating password:", err);
+                  return res.status(500).json({ 'message ': 'password weak .' });
+              });
+        }
+      })
+      .catch((err) => {
+        console.log("Error finding credentials:", err);
+        return res.status(500).json({ error: 'Failed to find credentials.' });
+      });
+})
+
 
 app.post('/upload-post', (req, res) => {
   const post_info = req.body;
@@ -79,7 +142,7 @@ app.post('/GetUserPosts',(req,res)=>{
     const uniqueID_p = req.body;
     PostModel.find(uniqueID_p)
      .then((data)=>{
-      console.log(data);
+     // console.log(data);
       return res.status(200).json(data);
      })
      .catch((err)=>{
@@ -87,6 +150,30 @@ app.post('/GetUserPosts',(req,res)=>{
       return res.status(400).json({"message":err});
      })
 })
+app.post('/update/profile/path', (req, res) => {
+  const info = req.body;
+  const uniqueID = info['uniqueID'];
+  const profile = info['profile'];
+
+  userModel.findOneAndUpdate(
+    { uniqueID: uniqueID }, // Find the user with the specified uniqueID
+    { $set: { profile: profile } }, // Update the profile field with the new value
+    { new: true } // Return the updated document
+  )
+    .then(updatedUser => {
+      if (updatedUser) {
+      //  console.log("updtaed:",updatedUser);
+        res.status(200).json({'data':updatedUser});
+      } else {
+      //  console.log(updatedUser);
+        res.status(404).json({ message: 'User not found' });
+      }
+    })
+    .catch(error => {
+     // console.log(error)
+      res.status(500).json({ message: 'Internal server error' });
+    });
+});
 
 app.post('/update/likes', (req, res) => {
   const response = req.body;
@@ -189,7 +276,7 @@ app.post('/logIn', (req, res) => {
   app.get('/GetUsernames', (req, res) => {
     userModel.find({}, { username: 1, uniqueID: 1,firstname: 1,lastname:1,profile: 1, _id: 0 })
       .then((docs) => {
-        console.log(docs);
+       // console.log(docs);
         return res.status(200).json({ document: docs });
       })
       .catch((err) => {
@@ -201,7 +288,7 @@ app.post('/logIn', (req, res) => {
   app.get('/AllUserData', (req, res) => {
     PostModel.find({})
       .then((docs) => {
-        console.log(docs);
+       // console.log(docs);
         return res.status(200).json({ document: docs });
       })
       .catch((err) => {

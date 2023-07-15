@@ -1,0 +1,7 @@
+POST http://localhost:1232/edit/userInfo/Bio
+Content-Type: application/json
+
+{
+    "uniqueID":"694974",
+    "Bio":"Bio test 1 ."
+}

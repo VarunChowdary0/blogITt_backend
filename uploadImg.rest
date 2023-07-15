@@ -1,0 +1,7 @@
+POST http://localhost:1232/update/profile/path
+Content-Type: application/json
+
+{
+    "uniqueID":"319981",
+    "profile":"319981_profile.jpg"
+}

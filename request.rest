@@ -2,9 +2,9 @@ POST http://localhost:1232/update/likes
 Content-Type: application/json
 
 {
-  "postID": "416516-68560903-1",
+  "postID": "598292-64408765-1",
   "likes": {
-    "likedBy": ["varun_123#"],
-    "count": 1
+    "likedBy": ["varun_2004","Thunder God"],
+    "count": 2
   }
 }

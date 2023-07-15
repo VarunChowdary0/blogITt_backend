@@ -29,6 +29,12 @@ const userSchema = new mongoose.Schema(
             required: true,
             unique : true
         },
+        location:{
+            type : String,
+        },
+        Bio:{
+            type :  String,
+        },
         uniqueID :{
             type : String,
             required : true,
