@@ -57,7 +57,11 @@ const userSchema = new mongoose.Schema(
         },
         following : {
             type : Array,
-            default: [' ']
+            default: []
+        },
+        followers : {
+            type : Array,
+            default: []
         },
         BlogPoints : {
             type : Number,

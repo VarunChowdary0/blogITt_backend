@@ -1,0 +1,7 @@
+DELETE   http://localhost:1232/manage/unfollow
+Content-Type: application/json
+
+{
+    "uniqueID":"319981",
+    "unfollowing":"416516"
+}

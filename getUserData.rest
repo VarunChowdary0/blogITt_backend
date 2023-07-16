@@ -1,0 +1,6 @@
+POST    http://localhost:1232/GetUserData
+Content-Type: application/json
+
+{
+    "uniqueID":"319981"
+}
