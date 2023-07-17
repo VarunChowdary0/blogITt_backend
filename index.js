@@ -62,7 +62,8 @@ app.post('/manage/follow',(req,res)=>{
   const Info=req.body;
   const uniqueID_= Info['uniqueID'];
   const newFollowing=Info['newFollowing']
-  userModel.findOne({"uniqueID":uniqueID_})
+  userModel.findOne(
+    {"uniqueID":uniqueID_})
    .then((foundInfo)=>{
     if(foundInfo.length===0)
     {
